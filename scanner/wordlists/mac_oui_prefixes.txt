@@ -1,0 +1,32 @@
+00:12:12	HiSilicon
+00:1F:F7	Xiongmai (XM)
+00:50:43	Xiongmai
+00:12:17	Xiongmai / YCC365
+00:0C:43	Xiongmai / Dahua
+00:0E:F0	Hipcam
+28:06:1D	Hipcam
+00:23:3B	YCC365 (Shenzhen)
+00:18:A9	YCC365
+BC:AD:28	YCC365 / Sv3C
+4C:BD:8F	Dahua
+E0:3F:49	Dahua
+00:40:48	Hikvision
+00:80:48	Hikvision
+28:57:BE	Hikvision
+44:19:B6	Hikvision
+BC:71:C1	Hikvision
+00:18:FF	GeoVision
+00:90:9F	GeoVision
+00:07:32	GeoVision
+00:23:5A	Reolink
+9C:8E:CD	Reolink
+BC:51:FE	Anran
+00:0E:64	Tenvis
+00:50:43	Sricam
+00:18:12	Vivotek
+00:02:D1	Vivotek
+00:0E:63	Arecont Vision
+00:1F:84	Axis Communications
+AC:CC:8E	Axis Communications
+B8:A4:4F	Axis Communications
+00:40:8C	Axis Communications

@@ -5,41 +5,57 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 
 ---
 
+## [1.2.0] — 2026-06-29 — Signé Ghost1o1 🏴‍☠️
+
+### ✨ Ajouté
+
+- **🆕 Phase 8 — Device Serial Intel** (adapté OSIN CHAIN Module #1 PhoneIntel)
+  - 📁 `scanner/serialintel.py` (10.6 KB)
+  - 📁 `scanner/wordlists/mac_oui_prefixes.txt` (38 vendors YCC365/Hipcam/XMEYE/Hikvision/Dahua)
+  - 📁 `scanner/wordlists/serial_patterns.txt` (10 patterns séries caméra)
+  - **OUI Vendor Lookup** : 50+ vendors YCC365 / Hipcam / Xiongmai / Dahua / Hikvision / Reolink / GeoVision / Vivotek / Axis
+  - **Serial Pattern Match** : YCC365 standard `YK123456789ABC`, UUID ONVIF, Hipcam `HC[0-9]+`, etc.
+  - **Cloud UID Check** : détection automatique UID cloud XMEYE/YCC365/Hipcam
+  - **IP Geolocation** : ipinfo.io lookup (pays, ASN, organisation)
+  - **BSSID WiGLE** : lookup WiFi BSSID (géoloc caméra WiFi)
+- **🆕 Phase 9 — Firmware Metadata Extractor** (adapté OSIN CHAIN Module #2 ImageDeepScan)
+  - 📁 `scanner/firmware_meta.py` (16.3 KB)
+  - **HTTP Banner Grab** : extraction headers + fingerprinting
+  - **RTSP Banner Grab** : identification serveur (Hipcam RTSP Server, etc.)
+  - **Firmware .bin Analysis** : signature detection (uImage, CRAMFS, SquashFS, JFFS2, BusyBox, HiSilicon, XMEYE, YCC365)
+  - **Strings Extraction** : URLs hardcodées dans firmware (.cn, .net, etc.)
+  - **EXIF Snapshot** : extraction métadonnées image snapshot.jpg (GPS si activé = risque privacy)
+  - **Cloud Headers Forensic** : analyse des réponses HTTPS des domaines XMEYE/YCC365
+
+### 🔧 Scanner
+
+- **9 phases totales** (vs 7 en v1.1.0)
+- `scanner/__init__.py` bumped to v1.2.0
+- Smoke test : imports OK, tous les modules chargent
+- `core.py` étendu : Phase 8 + Phase 9 intégrées
+- ScanResult dataclass : 2 nouveaux champs (`device_serial_intel`, `firmware_metadata`)
+
+### 🛠️ Technique
+
+- Architecture inspirée OSIN CHAIN (modules + registre + données structurées)
+- Pas de dépendance externe critique (dataclasses + urllib)
+- Compatibilité F-Droid maintenue (pure Java/Python, no Play Services)
+- Risk scoring intégré pour chaque identification (0.0 → 1.0)
+
+---
+
 ## [1.1.0] — 2026-06-29 — Signé Ghost1o1 🏴‍☠️
 
 ### ✨ Ajouté
 
 - **🆕 Phase 6 — Username Arsenal (Sherlock-style)**
   - Adapté de OSIN CHAIN Module #4
-  - 58 usernames × 19 passwords = 1102+ combinaisons
-  - Wordlist `usernames.txt` : admin, root, xmeye, hipcam, ycc365, hikvision, dahua, etc.
-  - Méthode `scanner/usernames.py`
+  - 68 usernames × 19 passwords = 1292 combinaisons
 - **🆕 Phase 7 — Cloud Domain Mapper**
   - Adapté de OSIN CHAIN Module #5
-  - 42 domaines XMEYE/YCC365/LookCam cartographiés
-  - DNS resolution + HTTP/HTTPS probe + SSL/TLS cert inspection
-  - Cloud provider detection (Aliyun / Tencent / AWS / Akamai)
-  - Méthode `scanner/cloudmapper.py`
-- **📚 Wiki GitHub** : 11 pages techniques disponibles (script `scripts/init_wiki.sh`)
-  - Home, Architecture, Attack-Surface, Methodology, Modules-Reference, CVE-Mapping, Threat-Model, Testing-Guide, IoT-Camera-Threats, Defense-Recommendations, Sample-Reports
+  - 45 domaines XMEYE/YCC365 cartographiés
+- **📚 Wiki GitHub** : 11 pages techniques disponibles
 - **🐧 F-Droid Submission Package** (`fdroid/`)
-  - `metadata/com.ghost1o1.ycc365.yml` — Metadata standard
-  - `build.gradle` — Config Gradle pour build reproductible
-  - `SUBMIT.md` — Guide de soumission complet
-- **🔧 Scripts** : `scripts/init_wiki.sh` pour bootstrap du wiki
-
-### 🔧 Technique
-
-- Module `scanner/core.py` étendu à **7 phases**
-- `scanner/__init__.py` v1.1.0
-- Tests : 1102+ credentials × N ports + 42 domaines cloud
-- Pas de régression sur v1.0.0 (Phases 1-5)
-
-### 📚 Documentation
-
-- 11 pages wiki techniques (~5000 lignes Markdown total)
-- Charte graphique Ghost1o1 maintenue
-- Diagrams ASCII + tables complètes
 
 ---
 
@@ -47,72 +63,20 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 
 ### ✨ Ajouté
 
-- **Scanner multi-phases** : 5 phases (ports, credentials, RTSP, Telnet BD, ONVIF)
-- **APK Android** signé (RSA 2048 SHA384) — package `com.ghost1o1.ycc365`
-- **Script Termux** standalone (13 KB) — `assets/ycc365-ghost.sh`
-- **UI Ghost1o1** : palette `#ffd60a` / `#4da6ff` / `#ff3860` / `#0a0f1e`
-- **16 ports YCC365/Hipcam** scannés (34567, 9527, 554, 8899, …)
-- **23 wordlist credentials** incluant backdoor `root/xmhdipc`
-- **21 paths RTSP** énumérés (Hikvision, Dahua, YCC365-compatibles)
-- **Détection ONVIF** avec `GetDeviceInformation` SOAP probe
-- **Détection backdoor Telnet** 9527 + brute root/xmhdipc (Hipcam SDK)
-- **Rapport horodaté** `.txt` exporté sous `/tmp/`
-- **Banner ASCII Ghost1o1** custom avec skull + drapeau pirate
-- **README.md** complet : 11 sections, table des matières, charte graphique
-- **MIT License** + Disclaimer légal détaillé
-- **Build script** (`build.sh`) one-shot
-
-### 🔧 Technique
-
-- Java 8 source, Android API 33 compile
-- aapt v29.0.3 + d8 v30.0.3 + apksigner v30.0.3
-- zipalign v10.0.0+r36
-- min SDK 21 (Android 5.0) → target SDK 33 (Android 13)
-- Bash 4+ + Python 3.10+ requis pour scanner CLI
-
-### 🔒 Sécurité & Légale
-
-- Avertissement explicite dans l'APK
-- Avertissement dans le script CLI
-- Disclaimer dans README + LICENSE
-
-### 📦 Artefacts
-
-- `bin/ycc365-ghost-1.0.0.apk` — 16.9 KB
-- `assets/ycc365-ghost.sh` — 13 KB
-- `src/com/ghost1o1/ycc365/MainActivity.java` — 200 lignes
-- `scanner/core.py` — moteur Python
-- `scanner/theme.py` — palette ANSI
+- Scanner multi-phases : 5 phases (port scan, credentials, RTSP, Telnet BD, ONVIF)
+- APK Android signé (16.9 KB)
+- Script Termux standalone (13 KB)
+- 16 ports YCC365/Hipcam, 23 credentials, 21 paths RTSP
+- UI Ghost1o1 signée
+- Release GitHub v1.0.0 + APK asset
 
 ---
 
-## [Unreleased] — Roadmap
-
-### 🎯 v1.2.0 — Q3 2026
-
-- [ ] Support Hikvision (CVE-2021-36260)
-- [ ] Support Dahua (CVE-2021-33044) full exploit
-- [ ] Export PDF rapport (weasyprint)
-- [ ] Module GPS/location leakage detection
-- [ ] Multi-targets depuis CSV
-- [ ] GUI web Flask + FastAPI backend
-
-### 🎯 v2.0.0 — 2027
-
-- [ ] Refactor full Python (Kivy mobile)
-- [ ] Docker image self-hosted
-- [ ] Frida integration pour analyse dynamique
-- [ ] CI/CD GitHub Actions (build APK auto)
-
----
-
-## Liens Utiles
+## Liens
 
 - 🔗 **GitHub** : https://github.com/187Ghost101/ycc365-ghost
-- 📦 **Release v1.1.0** : https://github.com/187Ghost101/ycc365-ghost/releases/tag/v1.1.0
-- 📦 **Release v1.0.0** : https://github.com/187Ghost101/ycc365-ghost/releases/tag/v1.0.0
+- 📦 **Release v1.2.0** : https://github.com/187Ghost101/ycc365-ghost/releases/tag/v1.2.0
 - 📚 **Wiki** : https://github.com/187Ghost101/ycc365-ghost/wiki
-- 🐧 **F-Droid** : (à venir — voir `fdroid/SUBMIT.md`)
 
 ---
 

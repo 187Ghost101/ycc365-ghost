@@ -19,6 +19,8 @@ from typing import Dict, List, Optional, Tuple
 
 from .usernames import UsernameArsenal
 from .cloudmapper import CloudDomainMapper
+from .serialintel import DeviceSerialIntel
+from .firmware_meta import FirmwareMetadataExtractor
 
 
 class Severity(Enum):
@@ -37,6 +39,8 @@ class ScanPhase(Enum):
     ONVIF = "Phase 5: ONVIF Probe"
     USERNAME_ARSENAL = "Phase 6: Username Arsenal (Sherlock)"
     CLOUD_MAPPER = "Phase 7: Cloud Domain Mapper"
+    DEVICE_SERIAL_INTEL = "Phase 8: Device Serial Intel (PhoneIntel)"
+    FIRMWARE_METADATA = "Phase 9: Firmware Metadata Extractor (ImageDeepScan)"
 
 
 @dataclass
@@ -77,6 +81,8 @@ class ScanResult:
     onvif_info: Dict = field(default_factory=dict)
     username_arsenal: Dict = field(default_factory=dict)
     cloud_mapper: Dict = field(default_factory=dict)
+    device_serial_intel: Dict = field(default_factory=dict)
+    firmware_metadata: Dict = field(default_factory=dict)
     vulnerabilities: List[Dict] = field(default_factory=list)
 
     def to_dict(self) -> Dict:
@@ -194,6 +200,8 @@ class GhostScanner:
         self.phase5_onvif()
         self.phase6_username_arsenal()
         self.phase7_cloud_mapper()
+        self.phase8_device_serial_intel()
+        self.phase9_firmware_metadata()
 
         self.result.duration_seconds = round(time.time() - start_time, 2)
         return self.result
@@ -333,6 +341,47 @@ class GhostScanner:
         self.result.cloud_mapper = {
             "domains": [r.to_dict() for r in results],
             "stats": mapper.stats(),
+        }
+
+    def phase8_device_serial_intel(self) -> None:
+        """Phase 8: Device Serial Intel — MAC + Serial + IP + BSSID lookup (adapté PhoneIntel)."""
+        print("\n═══ Phase 8: Device Serial Intel ═══")
+
+        # Récupérer MAC depuis ARP table (Linux) si dispo
+        identifiers = {"ip": self.target}
+
+        # Look for ONVIF UUID from previous phase
+        onvif_serial = None
+        if isinstance(self.result.onvif_info, dict):
+            onvif_serial = self.result.onvif_info.get("serial") or self.result.onvif_info.get("uuid")
+
+        if onvif_serial:
+            identifiers["serial"] = onvif_serial
+
+        intel = DeviceSerialIntel(self.target, timeout=self.timeout)
+        hits = intel.run(identifiers=identifiers)
+        self.result.device_serial_intel = {
+            "hits": [h.to_dict() for h in hits],
+            "stats": intel.stats(),
+        }
+
+    def phase9_firmware_metadata(self) -> None:
+        """Phase 9: Firmware Metadata Extractor — banners + EXIF + firmware analysis (adapté ImageDeepScan)."""
+        print("\n═══ Phase 9: Firmware Metadata Extractor ═══")
+
+        # Récupérer les domaines cloud mappés (de la phase 7)
+        cloud_domains = []
+        if isinstance(self.result.cloud_mapper, dict):
+            cloud_domains = [
+                d["domain"] for d in self.result.cloud_mapper.get("domains", [])
+                if d.get("reachable")
+            ][:10]
+
+        extractor = FirmwareMetadataExtractor(self.target, timeout=5.0)
+        findings = extractor.run(cloud_domains=cloud_domains)
+        self.result.firmware_metadata = {
+            "findings": [f.to_dict() for f in findings],
+            "stats": extractor.stats(),
         }
 
     def _tcp_connect(self, port: int, service: str) -> Optional[PortInfo]:

@@ -1,0 +1,13 @@
+# Camera Serial Number Patterns — Adapté YCC365 / Hipcam / XMEYE
+# Pattern|Description
+^[A-Z]{2}\d{8,12}$|YCC365 standard (YK123456789)
+^[A-Z0-9]{6}-[A-Z0-9]{6}$|Dash-separated (ABCDEF-123456)
+^\d{10,16}$|HiSilicon 16-digit
+^[A-F0-9]{32}$|Hex cloud UID (XMEYE/Hipcam)
+^[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}$|ONVIF UUID standard
+^HC[A-Z0-9]{10,12}$|Hipcam HC-prefix
+^\d{12,16}$|YCC365 cloud device ID
+^[A-Z]{3}\d{9,11}$|Dahua (ABC123456789)
+^DS-[A-Z0-9]{8,10}$|Hikvision DS-prefix
+^DS-2CD[a-zA-Z0-9-]{4,}$|Hikvision DS-2CD model
+^NVR-[A-Z0-9]{8,10}$|NVR ID pattern

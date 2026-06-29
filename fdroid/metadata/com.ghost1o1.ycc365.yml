@@ -20,9 +20,17 @@ Changelog: "https://github.com/187Ghost101/ycc365-ghost/releases"
 RepoType: git
 Repo: "https://github.com/187Ghost101/ycc365-ghost.git"
 
-Binaries: https://github.com/187Ghost101/ycc365-ghost/releases/download/v1.1.0/ycc365-ghost-1.1.0.apk
+Binaries: https://github.com/187Ghost101/ycc365-ghost/releases/download/v1.2.0/ycc365-ghost-1.2.0.apk
 
 Builds:
+  - versionName: '1.2.0'
+    versionCode: 12
+    commit: v1.2.0
+    subdir: app
+    gradle:
+      - yes
+    output: app/build/outputs/apk/release/app-release-unsigned.apk
+
   - versionName: '1.1.0'
     versionCode: 11
     commit: v1.1.0
@@ -46,16 +54,18 @@ Description: |
   ⚠️ Authorized testing only. Use only on equipment you own or have
   written permission to test.
 
-  Features:
-  • 7-phase scan: ports, credentials, RTSP, Telnet BD, ONVIF,
-    Username Arsenal, Cloud Domain Mapper
-  • 16 YCC365/Hipcam ports scanned
-  • 58 usernames × 19 passwords = 1102+ credential tests
-  • 42 cloud domains mapped
-  • Self-signed APK (no Google Play Services)
-  • MIT licensed, 100% open source
+  v1.2.0 features (9 phases):
+  • Phase 1: Port Scan (16 ports YCC365/Hipcam)
+  • Phase 2: Bruteforce (23 credentials)
+  • Phase 3: RTSP Detection (21 paths)
+  • Phase 4: Telnet Backdoor (Hipcam root/xmhdipc port 9527)
+  • Phase 5: ONVIF Probe
+  • Phase 6: Username Arsenal (68 × 19 = 1292 combos)
+  • Phase 7: Cloud Domain Mapper (45 domains XMEYE/YCC365)
+  • Phase 8: Device Serial Intel (MAC OUI + serial pattern + IP geo + WiGLE BSSID)
+  • Phase 9: Firmware Metadata Extractor (HTTP/RTSP banner + EXIF + firmware .bin)
 
 IssueTracker: "https://github.com/187Ghost101/ycc365-ghost/issues"
 
-CurrentVersion: '1.1.0'
-CurrentVersionCode: 11
+CurrentVersion: '1.2.0'
+CurrentVersionCode: 12
