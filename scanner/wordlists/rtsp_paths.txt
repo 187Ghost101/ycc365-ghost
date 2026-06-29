@@ -1,0 +1,25 @@
+# YCC365 Ghost Wordlist — RTSP Paths
+# Signé Ghost1o1 — 21 entrées
+# Sources: HiSilicon SDK, Hikvision compat, Dahua compat
+
+/onvif/streaming/channels/101
+/streaming/channels/101
+/11
+/12
+/live/ch00_0
+/live/main
+/live/sub
+/live/0/main
+/live/0/sub
+/user=admin&password=&channel=1&stream=0.sdp
+/av0_0
+/video/main
+/mpeg4
+/cam/realmonitor
+/0/usrnm:admin/0/usrpw:admin/0/1
+/Streaming/Channels/101
+/Streaming/Channels/1
+/Streaming/Channels/2
+/h264
+/h264/ch01/main/av_stream
+/trackID=1

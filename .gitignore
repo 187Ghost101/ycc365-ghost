@@ -1,0 +1,57 @@
+# Build artifacts
+build/
+bin/
+*.apk
+*.ap_
+*.dex
+classes.jar
+
+# Keystore - CRITICAL
+*.keystore
+*.jks
+keystore.properties
+
+# Java
+*.class
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.env
+.envrc
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.bash_history
+
+# Logs
+*.log
+logs/
+*.pid
+*.seed
+*.pid.lock
+
+# Runtime
+.pnp.*
+
+# Temporary files
+/tmp/ycc365_*
+*.tmp
+*.bak

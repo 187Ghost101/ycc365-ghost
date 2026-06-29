@@ -1,0 +1,135 @@
+═══════════════════════════════════════════════════════════════════
+  🏴‍☠️  YCC365 GHOST SCANNER — RAPPORT D'AUDIT
+  Signé Ghost1o1
+═══════════════════════════════════════════════════════════════════
+
+Date         : 2026-06-29 14:32:17
+Auditeur     : Ghost1o1
+Cible        : 192.168.1.100
+Hostname     : (non résolu)
+Vendor       : HiSilicon (probable)
+OUI MAC      : 00:12:12:XX:XX:XX
+
+───────────────────────────────────────────────────────────────
+  🎯 RÉSUMÉ EXÉCUTIF
+───────────────────────────────────────────────────────────────
+
+  Vulnérabilités CRITIQUES : 3
+  Vulnérabilités HIGH      : 2
+  Vulnérabilités MEDIUM    : 1
+  Score risque global      : 🔴 CRITIQUE
+
+───────────────────────────────────────────────────────────────
+  📡 PHASE 1 — PORTS OUVERTS
+───────────────────────────────────────────────────────────────
+
+  [OPEN] 80     HTTP (web admin)
+  [OPEN] 443    HTTPS
+  [OPEN] 554    RTSP (streaming)
+  [OPEN] 9527   TELNET (BACKDOOR)
+  [OPEN] 34567  HTTP (admin YCC365)
+  [OPEN] 34599  HTTP (login web)
+  [OPEN] 8899   ONVIF
+
+  Total : 7 ports exposés
+
+───────────────────────────────────────────────────────────────
+  🔑 PHASE 2 — CREDENTIALS VALIDÉS
+───────────────────────────────────────────────────────────────
+
+  🔴 [VALID] root:xmhdipc sur port 34567 (HTTP 200)
+  🟠 [VALID] admin:12345 sur port 34599 (HTTP 200)
+  🟡 [VALID] user:user   sur port 80    (HTTP 302 → /index.html)
+
+  ⚠️  3 comptes accessibles identifiés
+
+───────────────────────────────────────────────────────────────
+  📹 PHASE 3 — RTSP SANS AUTH
+───────────────────────────────────────────────────────────────
+
+  [✓] RTSP Server: Hipcam RTSP Server 1.0
+  [ACCESSIBLE] /onvif/streaming/channels/101
+  [ACCESSIBLE] /11
+  [ACCESSIBLE] /live/ch00_0
+  [ACCESSIBLE] /live/main
+  [ACCESSIBLE] /video/main
+
+  ⚠️  5 chemins accessibles SANS authentification
+
+───────────────────────────────────────────────────────────────
+  🚪 PHASE 4 — BACKDOOR TELNET
+───────────────────────────────────────────────────────────────
+
+  [CRITICAL] BACKDOOR TELNET ACTIF!
+
+  Tentative : root / xmhdipc
+  Réponse   : Welcome to HiSilicon IPCam
+               root@camera:/#
+  Preuve    : accès shell root obtenu
+
+  ════════════════════════════════════════════════
+  🚨 TAKE OVER COMPLET — DEVICE COMPROMIS
+  ════════════════════════════════════════════════
+
+  Commandes exécutables depuis l'attaquant :
+    • Lecture/écriture tous fichiers
+    • Modification configuration
+    • Désactivation logs
+    • Pivotage réseau interne
+    • Brickage device à distance
+    • Exfiltration firmware
+
+───────────────────────────────────────────────────────────────
+  📡 PHASE 5 — ONVIF PROBE
+───────────────────────────────────────────────────────────────
+
+  [ONVIF] Device répond sans auth
+
+  Manufacturer     : HiSilicon
+  Model            : YCC365 Plus
+  FirmwareVersion  : V5.0.4    ← ⚠️ VULNÉRABLE (CVE connues)
+  SerialNumber     : HISCAM-A4B3-2918
+  HardwareId       : 0x1234
+
+───────────────────────────────────────────────────────────────
+  📊 SCORING CVSS v3.1
+───────────────────────────────────────────────────────────────
+
+  VULN-001  Backdoor Telnet        : 9.8  🔴 CRITICAL
+  VULN-002  RTSP sans auth         : 7.5  🟠 HIGH
+  VULN-003  Default credentials    : 8.1  🟠 HIGH
+  VULN-004  ONVIF info disclosure  : 5.3  🟡 MEDIUM
+
+───────────────────────────────────────────────────────────────
+  🛡️ REMÉDIATION PRIORITAIRE
+───────────────────────────────────────────────────────────────
+
+  PRIORITÉ 1 (immédiat) :
+    [ ] Changer TOUS les mots de passe (admin, user, root)
+    [ ] Bloquer port 9527 (Telnet) au firewall
+    [ ] Désactiver si possible dans la config
+
+  PRIORITÉ 2 (sous 7 jours) :
+    [ ] Activer auth RTSP (Settings → Network → RTSP)
+    [ ] Update firmware V5.0.4 → dernière version
+    [ ] Restreindre ONVIF au réseau local uniquement
+
+  PRIORITÉ 3 (sous 30 jours) :
+    [ ] Isoler VLAN IoT (routeur)
+    [ ] Désactiver P2P cloud YCC365
+    [ ] Mettre en place VPN (WireGuard) pour accès distant
+    [ ] Surveiller logs connexions suspectes
+
+───────────────────────────────────────────────────────────────
+  📜 SIGNATURE
+───────────────────────────────────────────────────────────────
+
+  Rapport généré par YCC365 Ghost Scanner v1.0.0
+  Signé Ghost1o1 🏴‍☠️
+
+  ⚠️  USAGE STRICTEMENT AUTORISÉ UNIQUEMENT
+
+  Cet appareil DOIT être considéré comme compromis.
+  Aucune confiance ne peut lui être accordée.
+
+═══════════════════════════════════════════════════════════════════
