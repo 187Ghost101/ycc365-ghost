@@ -1,0 +1,85 @@
+# YCC365 Ghost Wordlist — Usernames
+# Signé Ghost1o1 — Adapté de OSIN CHAIN UsernameSherlock Module #4
+# 58 entrées — usernames probables sur caméras YCC365/Hipcam SDK
+
+# ─── Standards IoT chinois ───
+admin
+root
+user
+guest
+support
+service
+operator
+supervisor
+manager
+administrator
+maintain
+maintenance
+
+# ─── Fabricants OEM ───
+xmeye
+xmhdipc
+hipcam
+ycc365
+lookcam
+carecam
+techvision
+ipc
+ipcam
+dvr
+nvr
+cam
+camera
+
+# ─── Rôles techniques ───
+tech
+test
+demo
+factory
+oem
+vendor
+dealer
+installer
+integrator
+reseller
+partner
+
+# ─── Comptes cloud associés ───
+cloud
+server
+master
+masteradmin
+sysadmin
+webadmin
+netadmin
+
+# ─── Patterns Huawei/HiSilicon (Hipcam SDK basé sur HiSilicon) ───
+hikvision
+dahua
+uniview
+tvtonvif
+onvif
+rtsp
+stream
+
+# ─── Variations avec suffixes/tirets ───
+admin_1
+admin1
+root_1
+root1
+admin-user
+adminuser
+admin_user
+superadmin
+super-admin
+super_admin
+sa
+
+# ─── Placeholders communes ───
+username
+login
+account
+profile
+default
+public
+private

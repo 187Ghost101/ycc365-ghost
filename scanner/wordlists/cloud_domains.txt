@@ -1,0 +1,64 @@
+# YCC365 Ghost Wordlist — Cloud Domains
+# Signé Ghost1o1 — Adapté de OSIN CHAIN DomainMapper Module #5
+# 42 domaines cloud connus pour caméras YCC365/Hipcam SDK/XMEYE
+
+# ─── Infrastructure principale XMEYE (propriétaire SDK Hipcam) ───
+xmeye.net
+xmeye.com
+xmevc.com
+cloudxmeye.com
+xmeye.org
+xm-ipc.com
+
+# ─── YCC365 officiel ───
+ycc365.com
+ycc365.net
+ycc365.cn
+ycc365.org
+app.ycc365.com
+api.ycc365.com
+cloud.ycc365.com
+
+# ─── Sous-domaine stream/relay XMEYE ───
+relay.xmeye.net
+streaming.xmeye.net
+cloud.xmeye.net
+api.xmeye.net
+p2p.xmeye.net
+p2pserver.xmeye.net
+
+# ─── LookCam / variantes ───
+lookcam.io
+lookcam.net
+lookcam.live
+lookcam.app
+carecam.live
+carecam.io
+
+# ─── Apps alternatives même SDK ───
+icsee.com
+icsee.net
+iccam.app
+hipcam.io
+camhip.com
+
+# ─── CDN et backend génériques utilisés par ces firmware ───
+aliyun.com
+aliyuncs.com
+qcloud.com
+myqcloud.com
+amazonaws.com
+cloudfront.net
+akamaized.net
+
+# ─── Cloud relais US (déployé par Massive Dynamic YCC365plus) ───
+push-remote.com
+pushremote.net
+remotepush.io
+
+# ─── APIs publiques exposées dans firmware ───
+api.cloudlinks.cn
+connect.ycc365.io
+device.ycc365.io
+mobile.ycc365.io
+update.ycc365.io

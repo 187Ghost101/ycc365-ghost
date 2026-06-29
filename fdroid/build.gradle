@@ -1,0 +1,43 @@
+// ════════════════════════════════════════════════════════════════════
+// 🏴‍☠️ YCC365 Ghost Scanner — Gradle build for F-Droid
+// Signé Ghost1o1 — Build configuration compatible with F-Droid system
+// ════════════════════════════════════════════════════════════════════
+
+apply plugin: 'com.android.application'
+
+android {
+    namespace 'com.ghost1o1.ycc365'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId 'com.ghost1o1.ycc365'
+        minSdk 21
+        targetSdk 33
+        versionCode 11
+        versionName '1.1.0'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    // F-Droid prefers reproducible builds
+    buildTypes {
+        release {
+            minifyEnabled false
+            // Disable signing — F-Droid signs automatically
+            signingConfig null
+        }
+    }
+
+    // Reproducible build config
+    packagingOptions {
+        // Make builds deterministic
+    }
+}
+
+dependencies {
+    // No external dependencies — pure Java for F-Droid compatibility
+    // No Google Play Services, no Firebase
+}

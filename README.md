@@ -6,7 +6,7 @@
 ║   ▓██▓▒░       ░▒▓██▓                                       ║
 ║    ▓█▓▒░ ░▒▓██▓▒░ ░▒▓█    🏴‍☠️  Y C C 3 6 5   G H O S T    ║
 ║     █▒░ ░▓██▓▒░ ░▒▓█      ═══════════════════════════════    ║
-║     ▓█▒░ ░▒░░░░░ ░▒▓█      S C A N N E R   v 1 . 0 . 0      ║
+║     ▓█▒░ ░▒░░░░░ ░▒▓█      S C A N N E R   v 1 . 1 . 0      ║
 ║      ▓█▒░░░░░░░░░░░▒▓█                                      ║
 ║       █▒░░░░░░░░░░░▒█       S i g n é   G h o s t 1 o 1     ║
 ║       ▓█▒░░░░░░░░░▒▓█       ═══════════════════════════════    ║
@@ -18,11 +18,13 @@
 
 **Audit & exploitation YCC365 Plus / IPCAM / Hipcam SDK**
 
-[![Version](https://img.shields.io/badge/version-1.0.0-ffd60a?style=for-the-badge&logo=android)](https://github.com/ghost1o1/ycc365-ghost)
+[![Version](https://img.shields.io/badge/version-1.1.0-ffd60a?style=for-the-badge&logo=android)](https://github.com/187Ghost101/ycc365-ghost/releases)
 [![License](https://img.shields.io/badge/license-MIT--style-4da6ff?style=for-the-badge)](LICENSE)
-[![Author](https://img.shields.io/badge/author-Ghost1o1-ff3860?style=for-the-badge)](https://github.com/ghost1o1)
+[![Author](https://img.shields.io/badge/author-Ghost1o1-ff3860?style=for-the-badge)](https://github.com/187Ghost101)
 [![Platform](https://img.shields.io/badge/platform-Android%205.0%2B-0a0f1e?style=for-the-badge&logo=android)](https://developer.android.com)
-[![Tools](https://img.shields.io/badge/bash%20%7C%20python3-94a3b8?style=for-the-badge)](https://www.python.org)
+[![Phases](https://img.shields.io/badge/phases-7-94a3b8?style=for-the-badge)](docs/wiki/Modules-Reference.md)
+[![Wiki](https://img.shields.io/badge/wiki-11%20pages-10b981?style=for-the-badge&logo=github)](https://github.com/187Ghost101/ycc365-ghost/wiki)
+[![F-Droid](https://img.shields.io/badge/F--Droid-ready-0a0f1e?style=for-the-badge&logo=f-droid)](fdroid/SUBMIT.md)
 
 </div>
 
@@ -32,6 +34,8 @@
 
 - [🎯 Contexte](#-contexte)
 - [⚠️ Avertissement Légal](#️-avertissement-légal)
+- [📚 Wiki Technique](#-wiki-technique) ⭐ NEW
+- [🐧 F-Droid Submission](#-f-droid-submission) ⭐ NEW
 - [🎯 Surface d'Attaque](#-surface-dattaque)
 - [📦 Contenu du Repo](#-contenu-du-repo)
 - [🚀 Installation](#-installation)
@@ -169,6 +173,58 @@ Auteur : **Ghost1o1** — Pentest professionnel autorisé uniquement.
 /h264/ch01/main/av_stream
 /trackID=1
 ```
+
+---
+
+## 📚 Wiki Technique ⭐ NEW v1.1.0
+
+> **11 pages techniques complètes** — accessibles sur le wiki GitHub après amorçage.
+
+📖 URL : [https://github.com/187Ghost101/ycc365-ghost/wiki](https://github.com/187Ghost101/ycc365-ghost/wiki)
+
+```bash
+# Amorce automatique du wiki :
+./scripts/init_wiki.sh <votre_token_github>
+```
+
+| Page | Description | Lignes |
+|------|-------------|--------|
+| 🏠 [Home](https://github.com/187Ghost101/ycc365-ghost/wiki) | Index du wiki | ~50 |
+| 🏛️ [Architecture](https://github.com/187Ghost101/ycc365-ghost/wiki/Architecture) | Architecture C4 + design patterns | ~400 |
+| 🎯 [Attack-Surface](https://github.com/187Ghost101/ycc365-ghost/wiki/Attack-Surface) | 10 vecteurs d'attaque détaillés | ~500 |
+| 📋 [Methodology](https://github.com/187Ghost101/ycc365-ghost/wiki/Methodology) | PTES + OWASP IoT méthodologies | ~450 |
+| ⚠️ [Threat-Model](https://github.com/187Ghost101/ycc365-ghost/wiki/Threat-Model) | STRIDE + attack trees | ~600 |
+| 🛡️ [Defense-Recommendations](https://github.com/187Ghost101/ycc365-ghost/wiki/Defense-Recommendations) | Plan remédiation 30 jours | ~400 |
+| 🧩 [Modules-Reference](https://github.com/187Ghost101/ycc365-ghost/wiki/Modules-Reference) | Référence des 7 modules | ~500 |
+| 💀 [CVE-Mapping](https://github.com/187Ghost101/ycc365-ghost/wiki/CVE-Mapping) | CVEs avec CVSS + PoC | ~400 |
+| 🌐 [IoT-Camera-Threats](https://github.com/187Ghost101/ycc365-ghost/wiki/IoT-Camera-Threats) | Paysage IoT mondial | ~500 |
+| 🧪 [Testing-Guide](https://github.com/187Ghost101/ycc365-ghost/wiki/Testing-Guide) | Guide d'utilisation pas-à-pas | ~450 |
+| 📊 [Sample-Reports](https://github.com/187Ghost101/ycc365-ghost/wiki/Sample-Reports) | 3 rapports types | ~350 |
+
+---
+
+## 🐧 F-Droid Submission ⭐ NEW v1.1.0
+
+> Le scanner peut aussi être publié sur **F-Droid** comme distribution alternative.
+
+📖 Guide complet : [`fdroid/SUBMIT.md`](fdroid/SUBMIT.md)
+
+```bash
+# Fichiers F-Droid préparés :
+fdroid/
+├── metadata/com.ghost1o1.ycc365.yml   # Metadata standard F-Droid
+├── build.gradle                        # Config Gradle reproductible
+├── SUBMIT.md                           # Guide de soumission
+└── main/AndroidManifest.xml            # Manifest F-Droid
+
+# Processus résumé :
+# 1. Fork https://gitlab.com/fdroid/fdroiddata
+# 2. Copier metadata.yml vers fdroiddata/metadata/
+# 3. Soumettre MR (1-4 semaines review)
+# 4. App apparaît sur F-Droid.org
+```
+
+**Pourquoi F-Droid ?** Alternance au Google Play Store. 2M+ downloads mensuels, 100% open-source, pas de tracking.
 
 ---
 

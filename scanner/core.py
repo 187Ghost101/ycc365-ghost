@@ -17,6 +17,9 @@ from enum import Enum
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+from .usernames import UsernameArsenal
+from .cloudmapper import CloudDomainMapper
+
 
 class Severity(Enum):
     CRITICAL = "🔴 CRITICAL"
@@ -32,6 +35,8 @@ class ScanPhase(Enum):
     RTSP = "Phase 3: RTSP Detection"
     TELNET_BD = "Phase 4: Telnet Backdoor"
     ONVIF = "Phase 5: ONVIF Probe"
+    USERNAME_ARSENAL = "Phase 6: Username Arsenal (Sherlock)"
+    CLOUD_MAPPER = "Phase 7: Cloud Domain Mapper"
 
 
 @dataclass
@@ -70,6 +75,8 @@ class ScanResult:
     rtsp_paths: List[RTSPPath] = field(default_factory=list)
     telnet_backdoor_active: bool = False
     onvif_info: Dict = field(default_factory=dict)
+    username_arsenal: Dict = field(default_factory=dict)
+    cloud_mapper: Dict = field(default_factory=dict)
     vulnerabilities: List[Dict] = field(default_factory=list)
 
     def to_dict(self) -> Dict:
@@ -185,6 +192,8 @@ class GhostScanner:
         self.phase3_rtsp()
         self.phase4_telnet_backdoor()
         self.phase5_onvif()
+        self.phase6_username_arsenal()
+        self.phase7_cloud_mapper()
 
         self.result.duration_seconds = round(time.time() - start_time, 2)
         return self.result
@@ -296,6 +305,35 @@ class GhostScanner:
                 print(f"  [ONVIF] {self.result.onvif_info}")
         except (FileNotFoundError, subprocess.TimeoutExpired):
             pass
+
+    def phase6_username_arsenal(self) -> None:
+        """Phase 6: Username Arsenal — 58 usernames × 19 passwords (Sherlock-style)."""
+        print("\n═══ Phase 6: Username Arsenal (Sherlock-style) ═══")
+        http_ports = [
+            p.port for p in self.result.open_ports
+            if p.port in (80, 443, 8000, 8080, 34567, 34599)
+        ]
+        if not http_ports:
+            print("  [!] Aucun port HTTP ouvert")
+            self.result.username_arsenal = {"hits": [], "stats": {}}
+            return
+
+        arsenal = UsernameArsenal(self.target, timeout=self.timeout)
+        hits = arsenal.run(http_ports=http_ports)
+        self.result.username_arsenal = {
+            "hits": [hit.__dict__ for hit in hits],
+            "stats": arsenal.stats(),
+        }
+
+    def phase7_cloud_mapper(self) -> None:
+        """Phase 7: Cloud Domain Mapper — cartographie 42 domaines XMEYE/YCC365."""
+        print("\n═══ Phase 7: Cloud Domain Mapper ═══")
+        mapper = CloudDomainMapper(self.target, timeout=5.0)
+        results = mapper.run()
+        self.result.cloud_mapper = {
+            "domains": [r.to_dict() for r in results],
+            "stats": mapper.stats(),
+        }
 
     def _tcp_connect(self, port: int, service: str) -> Optional[PortInfo]:
         try:

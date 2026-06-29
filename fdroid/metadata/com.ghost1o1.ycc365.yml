@@ -1,0 +1,61 @@
+# F-Droid metadata for YCC365 Ghost Scanner
+# Signé Ghost1o1 — Reproduction receipt for F-Droid
+
+Categories:
+  - Security
+  - System
+  - Internet
+
+License: MIT
+
+AuthorName: Ghost1o1
+AuthorEmail: ghost1o1@ghost-sec.ca
+AuthorWebSite: "https://github.com/187Ghost101"
+
+WebSite: "https://github.com/187Ghost101/ycc365-ghost"
+SourceCode: "https://github.com/187Ghost101/ycc365-ghost"
+Tracker: "https://github.com/187Ghost101/ycc365-ghost/issues"
+Changelog: "https://github.com/187Ghost101/ycc365-ghost/releases"
+
+RepoType: git
+Repo: "https://github.com/187Ghost101/ycc365-ghost.git"
+
+Binaries: https://github.com/187Ghost101/ycc365-ghost/releases/download/v1.1.0/ycc365-ghost-1.1.0.apk
+
+Builds:
+  - versionName: '1.1.0'
+    versionCode: 11
+    commit: v1.1.0
+    subdir: app
+    gradle:
+      - yes
+    output: app/build/outputs/apk/release/app-release-unsigned.apk
+
+  - versionName: '1.0.0'
+    versionCode: 10
+    commit: v1.0.0
+    subdir: app
+    gradle:
+      - yes
+    output: app/build/outputs/apk/release/app-release-unsigned.apk
+
+AutoName: YCC365 Ghost Scanner
+Description: |
+  IoT security audit scanner for YCC365 / Hipcam / XMEYE cameras.
+
+  ⚠️ Authorized testing only. Use only on equipment you own or have
+  written permission to test.
+
+  Features:
+  • 7-phase scan: ports, credentials, RTSP, Telnet BD, ONVIF,
+    Username Arsenal, Cloud Domain Mapper
+  • 16 YCC365/Hipcam ports scanned
+  • 58 usernames × 19 passwords = 1102+ credential tests
+  • 42 cloud domains mapped
+  • Self-signed APK (no Google Play Services)
+  • MIT licensed, 100% open source
+
+IssueTracker: "https://github.com/187Ghost101/ycc365-ghost/issues"
+
+CurrentVersion: '1.1.0'
+CurrentVersionCode: 11
